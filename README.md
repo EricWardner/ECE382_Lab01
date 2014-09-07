@@ -5,7 +5,7 @@ MSP430 Calculator
 
 ##Pre-Lab
 ####Psuedo Code
-```
+```python
 final ADD_OP = 0x11;
 final SUB_OP = 0x22;
 final MUL_OP = 0x33;
@@ -52,3 +52,4 @@ clr(){
     jmp main;
 }
 ```
+
