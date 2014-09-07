@@ -14,7 +14,7 @@ final END_OP = 0x55;
 
 input[arrayPtr] = 0x1000-0xFFFF;
 
-result = 0x230-0x240
+result[] = 0x230-0x240;
 
 main(){
 operand = input[arrayPtr];
