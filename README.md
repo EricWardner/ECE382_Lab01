@@ -9,7 +9,7 @@ The array will need a pointer which will be a register
 the array pointer will need to change after each operation is done and increment by enough to point at the next operation
 there will need to be temp variables to store operands. A register will do this.
 
-####Psuedo Code
+#####Psuedo Code
 ```java
 final ADD_OP = 0x11;
 final SUB_OP = 0x22;
