@@ -22,13 +22,13 @@ operation = input[arrayPtr+1];
 2ndOperand = input[arrayPtr+2];
   if(operation = 0x11){
     add();
-  }else if(operation = 0x22){
+  }else if(operation == 0x22){
     sub();
-  }else if(operation = 0x33){
+  }else if(operation == 0x33){
     mul();
-  }else if(operation = 0x44){
+  }else if(operation == 0x44){
     clr();
-  }else if(operation = 0x55){
+  }else if(operation == 0x55){
     end();
   }
 }
