@@ -34,17 +34,17 @@ operation = input[arrayPtr+1];
 }
 add(){
   result[] = operand + 2ndOperand;
-  arrayPtr = arrayPts+3;
+  arrayPtr = arrayPtr+3;
   jmp main;
 }
 sub(){
   result[] = operand - 2ndOperand;
-  arrayPtr = arrayPts+3;
+  arrayPtr = arrayPtr+3;
   jmp main;
 }
 mul(){
   result[] = operand * 2ndOperand;
-  arrayPtr = arrayPts+3;
+  arrayPtr = arrayPtr+3;
   jmp main;
 }
 clr(){
