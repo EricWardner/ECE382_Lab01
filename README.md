@@ -20,7 +20,7 @@ main(){
 operand = input[arrayPtr];
 operation = input[arrayPtr+1];
 2ndOperand = input[arrayPtr+2];
-  if(operation = 0x11){
+  if(operation == 0x11){
     add();
   }else if(operation == 0x22){
     sub();
