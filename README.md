@@ -4,6 +4,11 @@ ECE382_Lab01
 MSP430 Calculator
 
 ##Pre-Lab
+The program will take a mathmatical operation as an input in the form of an array of bytes.
+The array will need a pointer which will be a register
+the array pointer will need to change after each operation is done and increment by enough to point at the next operation
+there will need to be temp variables to store operands. A register will do this.
+
 ####Psuedo Code
 ```java
 final ADD_OP = 0x11;
