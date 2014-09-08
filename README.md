@@ -17,7 +17,7 @@ final MUL_OP = 0x33;
 final CLR_OP = 0x44;
 final END_OP = 0x55;
 
-input[arrayPtr] = 0x1000-0xFFFF;
+input[arrayPtr] = a bunch of operations;
 
 result[] = 0x230-0x240;
 
