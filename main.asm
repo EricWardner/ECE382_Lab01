@@ -28,8 +28,8 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 			mov.w	#op1, r5				;r5 is the array pointer
 			mov.w	#0x200, r10				;result array in RAM
 
-getFunc		mov.b	@r5+, r7				;stores operand
-			mov.b	@r5+, r6				;stores operator
+			mov.b	@r5+, r7				;stores operand
+getFunc		mov.b	@r5+, r6				;stores operator
 			mov.b	@r5+, r8				;stores 2nd operand
 
 			cmp.b	#0x11, r6
