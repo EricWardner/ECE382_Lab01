@@ -49,10 +49,12 @@ getFunc		mov.b	@r5+, r6				;stores operator
 ADD_OP		add.b	r7, r8
 			mov.w	r8, 0(r10)
 			inc.w	r10
+			inc.w	r10
 			jmp		getFunc
 
 SUB_OP		sub.b	r7, r8
 			mov.w	r8, 0(r10)
+			inc.w	r10
 			inc.w	r10
 			jmp		getFunc
 
@@ -67,10 +69,12 @@ MUL_OP		add.b	r7, r8
 			jmp		MUL_OP
 
 endMul		inc.w	r10
+			inc.w	r10
 			jmp		getFunc
 
 
 CLR_OP		mov.b	#0x00, 0(r10)
+			inc.w	r10
 			inc.w	r10
 			jmp		getFunc
 
