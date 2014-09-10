@@ -16,7 +16,7 @@
                                             ; section
 
 
-op1:		.byte	0x14, 0x11, 0x32, 0x22, 0x08, 0x44, 0x04, 0x33, 0x02, 0x55
+op1:		.byte	0x14, 0x11, 0x32, 0x22, 0x08, 0x44, 0x0B, 0x33, 0x03, 0x55
 ;-------------------------------------------------------------------------------
 RESET       mov.w   #__STACK_END,SP         ; Initialize stackpointer
 StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
@@ -57,13 +57,18 @@ SUB_OP		sub.b	r7, r8
 			jmp		getFunc
 
 
-MUL_OP		add.b	r7, r8
-			mov.b	r8, 0(r10)
-			rra.b	r7
-			tst		r7
+MUL_OP		mov.w	r7, r13
+			rra.b	r13
+			jc		MulAdd
+MUL_LOOP	rra.b	r7
+			cmp.b	#0x01, r7
 			jz		endMul
-			rra.b	r8
-			jmp		MUL_OP
+			jnc		MUL_LOOP
+MulAdd		mov.b	r8, r9
+			rla.b	r8
+			add.b	r9, r8
+			mov.b	r8, 0(r10)
+			jmp		MUL_LOOP
 
 endMul		inc.w	r10
 			jmp		getFunc
