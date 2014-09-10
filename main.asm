@@ -47,18 +47,18 @@ getFunc		mov.b	@r5+, r7				;stores operand
 
 
 ADD_OP		add.b	r7, r8
-			mov.w	r8, @r10
+			mov.w	r8, 0(r10)
 			inc.b	r10
 			jmp		getFunc
 
 SUB_OP		sub.b	r7, r8
-			mov.w	r8, @r10
+			mov.w	r8, 0(r10)
 			inc.b	r10
 			jmp		getFunc
 
 
 MUL_OP		add.b	r7, r8
-			mov.w	r8, @r10
+			mov.w	r8, 0(r10)
 			inc		r10
 			rla.b	r7
 			tst		r7
@@ -67,7 +67,7 @@ MUL_OP		add.b	r7, r8
 			jmp		MUL_OP
 
 
-CLR_OP		mov.b	#0x00, @r10
+CLR_OP		mov.b	#0x00, 0(r10)
 			inc.b	r10
 			jmp		getFunc
 
