@@ -16,7 +16,7 @@
                                             ; section
 
 
-op1:		.byte	0x14, 0x11, 0x32, 0x22, 0x08, 0x44, 0x0B, 0x33, 0x03, 0x55
+op1:		.byte	0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xDD, 0x44, 0x08, 0x22, 0x09, 0x44, 0xFF, 0x22, 0xFD, 0x55
 ;-------------------------------------------------------------------------------
 RESET       mov.w   #__STACK_END,SP         ; Initialize stackpointer
 StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
@@ -47,14 +47,13 @@ ClrJMP		cmp.b	#0x11, r6
 
 
 ADD_OP		add.b	r7, r8
-			mov.b	r8, 0(r10)
-			inc.w	r10
-			jmp		getFunc
+			jc		AddOverflow
+			jmp		reset
 
 SUB_OP		sub.b	r7, r8
-			mov.b	r8, 0(r10)
-			inc.w	r10
-			jmp		getFunc
+			cmp		#0xFF, r8
+			jeq		SubOverflow
+			jmp		reset
 
 
 MUL_OP		mov.w	r7, r13
@@ -62,16 +61,13 @@ MUL_OP		mov.w	r7, r13
 			jc		MulAdd
 MUL_LOOP	rra.b	r7
 			cmp.b	#0x01, r7
-			jz		endMul
+			jeq		reset
 			jnc		MUL_LOOP
 MulAdd		mov.b	r8, r9
 			rla.b	r8
 			add.b	r9, r8
-			mov.b	r8, 0(r10)
+			jc		AddOverflow
 			jmp		MUL_LOOP
-
-endMul		inc.w	r10
-			jmp		getFunc
 
 
 CLR_OP		mov.b	#0x00, 0(r10)
@@ -81,6 +77,16 @@ CLR_OP		mov.b	#0x00, 0(r10)
 			mov.b	@r5+, r7
 			jmp		ClrJMP
 
+reset		mov.b	r8, 0(r10)
+			inc.w	r10
+			jmp		getFunc
+
+
+AddOverflow	mov.b	#0xFF, r8
+			jmp		reset
+
+SubOverflow	mov.b	#0x00, r8
+			jmp		reset
 
 END_OP		jmp		END_OP
 
