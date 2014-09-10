@@ -16,7 +16,7 @@
                                             ; section
 
 
-op1:		.byte	0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xDD, 0x44, 0x08, 0x22, 0x09, 0x44, 0xFF, 0x22, 0xFD, 0x55
+op1:		.byte	0x22, 0x11, 0x22, 0x22, 0x33, 0x33, 0x08, 0x44, 0x08, 0x22, 0x09, 0x44, 0xff, 0x11, 0xff, 0x44, 0xcc, 0x33, 0x02, 0x33, 0x00, 0x44, 0x33, 0x33, 0x08, 0x55
 ;-------------------------------------------------------------------------------
 RESET       mov.w   #__STACK_END,SP         ; Initialize stackpointer
 StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
@@ -57,14 +57,16 @@ SUB_OP		sub.b	r7, r8
 
 
 MUL_OP		mov.w	r7, r13
+			mov.w	#0x00, r9
 			rra.b	r13
 			jc		MulAdd
-MUL_LOOP	rra.b	r7
-			cmp.b	#0x01, r7
+MUL_LOOP	cmp.b	#0x01, r7
 			jeq		reset
-			jnc		MUL_LOOP
-MulAdd		mov.b	r8, r9
 			rla.b	r8
+			jc		AddOverflow
+			rra.b	r7
+			jnc		MUL_LOOP
+MulAdd		rla.b	r8
 			add.b	r9, r8
 			jc		AddOverflow
 			jmp		MUL_LOOP
