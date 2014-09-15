@@ -69,16 +69,15 @@ clr(){
 ##Lab Process
 I began the design process by implementing the nessicary "switch" statements in assembly. This was accomplished using compares and jumps. The final result is as follows
 ```asm
-      cmp.b	#0x11, r6
-			jeq		ADD_OP
-			cmp.b	#0x22, r6
-			jeq		SUB_OP
-			cmp.b	#0x33, r6
-			jeq		MUL_OP
-			cmp.b	#0x44, r6
-			jeq		CLR_OP
-			cmp.b	#0x55, r6
-			jeq		END_OP
-
-			jmp		END_OP
+      	cmp.b	#0x11, r6
+	jeq	ADD_OP
+	cmp.b	#0x22, r6
+	jeq	SUB_OP
+	cmp.b	#0x33, r6
+	jeq	MUL_OP
+	cmp.b	#0x44, r6
+	jeq	CLR_OP
+	cmp.b	#0x55, r6
+	jeq	END_OP
+	jmp	END_OP
 ```
