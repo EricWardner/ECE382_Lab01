@@ -102,18 +102,18 @@ jmp	reset
 ######Multiply
 ```asm
 MUL_OP		mov.w	r7, r13
-		mov.w	#0x00, r9
-		rra.b	r13
-		jc	MulAdd
+	mov.w	#0x00, r9
+	rra.b	r13
+	jc	MulAdd
 MUL_LOOP	cmp.b	#0x01, r7
-		jeq	reset
-		rla.b	r8
-		jc	AddOverflow
-		rra.b	r7
-		jnc	MUL_LOOP
+	jeq	reset
+	rla.b	r8
+	jc	AddOverflow
+	rra.b	r7
+	jnc	MUL_LOOP
 MulAdd		rla.b	r8
-		add.b	r9, r8
-		jc	AddOverflow
-		jmp	MUL_LOOP
+	add.b	r9, r8
+	jc	AddOverflow
+	jmp	MUL_LOOP
 ```
 ######
