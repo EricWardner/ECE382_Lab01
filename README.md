@@ -67,7 +67,8 @@ clr(){
 }
 ```
 ##Lab Process
-I began the design process by implementing the nessicary "switch" statements in assembly. This was accomplished using compares and jumps. The final result is as follows
+The lab design process was broken into 2 main parts, the switch "if else" statements and the actual mathmatical operation functions. First the switches were made.
+######Case Switch
 ```asm
   	cmp.b	#0x11, r6
 	jeq	ADD_OP
@@ -81,3 +82,38 @@ I began the design process by implementing the nessicary "switch" statements in 
 	jeq	END_OP
 	jmp	END_OP
 ```
+
+Next the operations were dealt with
+######Add
+The add operation was simple, add the two registers and return, oveflow was also considered
+```asm
+add.b	r7, r8
+jc	AddOverflow
+jmp	reset
+```
+######Subtract
+The subtration operation was similar to the addition, overflow had to be handled differently
+```asm
+sub.b	r7, r8
+cmp	#0xFF, r8
+jeq	SubOverflow
+jmp	reset
+```
+######Multiply
+```asm
+MUL_OP		mov.w	r7, r13
+		mov.w	#0x00, r9
+		rra.b	r13
+		jc	MulAdd
+MUL_LOOP	cmp.b	#0x01, r7
+		jeq	reset
+		rla.b	r8
+		jc	AddOverflow
+		rra.b	r7
+		jnc	MUL_LOOP
+MulAdd		rla.b	r8
+		add.b	r9, r8
+		jc	AddOverflow
+		jmp	MUL_LOOP
+```
+######
