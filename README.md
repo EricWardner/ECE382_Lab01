@@ -120,4 +120,11 @@ MulAdd
 		jc	AddOverflow
 		jmp	MUL_LOOP
 ```
-######
+
+difficulties with the multiplication method occured becasue I initilly didn't have the subtraction overflow properly handled. 
+######B Functionality
+To check for overflows the jc instruction was used. If there was a carry, an overflow occured
+
+#####Difficulties/Debugging
+The hardest part of the program was getting the pointer to always line up with the right place in the "input array" 
+the "pointer" in the program was a register that incremented after each reference.
