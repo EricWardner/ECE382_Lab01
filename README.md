@@ -3,6 +3,15 @@ ECE382_Lab01
 
 MSP430 Calculator
 
+#####Purpose
+Create a calculator program in assembly that reads a string of specific bytes as a math function and solves it
+The following bytes represent operations
+0x11 - add
+0x22 - subtract
+0x33 - multiply
+0x44 - clear
+0x55 - end
+
 ##Pre-Lab
 The program will take a mathmatical operation as an input in the form of an array of bytes.
 The array will need a pointer which will be a register
@@ -57,4 +66,19 @@ clr(){
     jmp main;
 }
 ```
+##Lab Process
+I began the design process by implementing the nessicary "switch" statements in assembly. This was accomplished using compares and jumps. The final result is as follows
+```asm
+      cmp.b	#0x11, r6
+			jeq		ADD_OP
+			cmp.b	#0x22, r6
+			jeq		SUB_OP
+			cmp.b	#0x33, r6
+			jeq		MUL_OP
+			cmp.b	#0x44, r6
+			jeq		CLR_OP
+			cmp.b	#0x55, r6
+			jeq		END_OP
 
+			jmp		END_OP
+```
